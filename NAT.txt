@@ -1,0 +1,78 @@
+NAT
+
+object network INSIDE1-OUTSIDE1
+subnet 172.16.0.0 255.255.0.0
+nat (INSIDE-01, OUTSIDE-01) dynamic interface
+
+object network INSIDE2-OUTSIDE1
+subnet 172.16.0.0 255.255.0.0
+nat (INSIDE-02, OUTSIDE-01) dynamic interface
+ex
+
+object network INSIDEW1-OUTSIDEW1
+subnet 10.20.0.0 255.255.0.0
+nat (INSIDE-01, OUTSIDE-01) dynamic interface
+
+object network INSIDEW2-OUTSIDEW1
+subnet 10.20.0.0 255.255.0.0
+nat (INSIDE-02, OUTSIDE-01) dynamic interface
+ex
+
+""""""""""""""""""""""""""""""
+
+object network INSIDE1-OUTSIDE2
+subnet 172.16.0.0 255.255.0.0
+nat (INSIDE-01, OUTSIDE-02) dynamic interface
+
+object network INSIDE2-OUTSIDE2
+subnet 172.16.0.0 255.255.0.0
+nat (INSIDE-02, OUTSIDE-02) dynamic interface
+
+object network INSIDEW1-OUTSIDEW2
+subnet 10.20.0.0 255.255.0.0
+nat (INSIDE-01, OUTSIDE-02) dynamic interface
+
+object network INSIDEW2-OUTSIDEW2
+subnet 10.20.0.0 255.255.0.0
+nat (INSIDE-02, OUTSIDE-02) dynamic interface
+
+object network DMZ-OUTSIDE1
+subnet 10.11.11.0 255.255.255.224
+nat (dmz, OUTSIDE-01) dynamic interface
+
+object network DMZ-OUTSIDE2
+subnet 10.11.11.0 255.255.255.224
+nat (dmz, OUTSIDE-02) dynamic interface
+
+
+
+ON FW02
+
+
+!
+object network INSIDE1-OUTSIDE1
+ subnet 172.16.0.0 255.255.0.0
+ nat (INSIDE-01,OUTSIDE-01) dynamic interface
+object network INSIDE1-OUTSIDE2
+ subnet 172.16.0.0 255.255.0.0
+ nat (INSIDE-01,OUTSIDE-02) dynamic interface
+object network INSIDE2-OUTSIDE1
+ subnet 172.16.0.0 255.255.0.0
+ nat (INSIDE-02,OUTSIDE-01) dynamic interface
+object network INSIDE2-OUTSIDE2
+ subnet 172.16.0.0 255.255.0.0
+ nat (INSIDE-02,OUTSIDE-02) dynamic interface
+object network INSIDEW1-OUTSIDEW1
+ subnet 10.20.0.0 255.255.0.0
+ nat (INSIDE-01,OUTSIDE-01) dynamic interface
+object network INSIDEW1-OUTSIDEW2
+ subnet 10.20.0.0 255.255.0.0
+ nat (INSIDE-01,OUTSIDE-02) dynamic interface
+object network INSIDEW2-OUTSIDEW1
+ subnet 10.20.0.0 255.255.0.0
+ nat (INSIDE-02,OUTSIDE-01) dynamic interface
+object network INSIDEW2-OUTSIDEW2
+ subnet 10.20.0.0 255.255.0.0
+ nat (INSIDE-02,OUTSIDE-02) dynamic interface
+!
+

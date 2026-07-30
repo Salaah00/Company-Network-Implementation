@@ -1,0 +1,115 @@
+Firewalls
+
+
+ON FW-01
+
+en
+
+conf t
+hostname FW-01
+int gig1/3
+no shut
+ip add 10.2.2.2 255.255.255.252
+nameif INSIDE-01
+security-level 100
+ex
+
+
+int gig1/4
+no shut
+ip add 10.2.2.10 255.255.255.252
+nameif INSIDE-02
+security-level 100
+ex
+
+int gig1/5
+no shut
+ip add 10.11.11.1 255.255.255.224
+nameif DMZ
+security-level 70
+ex
+
+
+int gig1/1
+no shut
+ip add 105.100.50.2 255.255.255.252
+nameif OUTSIDE-01
+security-level 0
+ex
+
+int gig1/2
+no shut
+ip add 197.200.100.2 255.255.255.252
+nameif OUTSIDE-02
+security-level 0
+ex 
+
+
+wr mem
+
+
+##########################################"
+
+hostname FW-02
+int gig1/3
+no shut
+ip add 10.2.2.6 255.255.255.252
+nameif INSIDE-01
+security-level 100
+ex
+
+int gig1/4
+no shut
+ip add 10.2.2.14 255.255.255.252
+nameif INSIDE-02
+security-level 100
+ex
+
+
+int gig1/1
+no shut
+ip add 105.100.50.6 255.255.255.252
+nameif OUTSIDE-01
+security-level 0
+ex
+
+int gig1/2
+no shut
+ip add 197.200.100.6 255.255.255.252
+nameif OUTSIDE-02
+security-level 0
+ex 
+
+########################################""""
+
+
+ON FW-01
+
+route OUTSIDE-01 0.0.0.0 0.0.0.0 105.100.50.1
+route OUTSIDE-02 0.0.0.0 0.0.0.0 197.200.100.1 70
+
+
+router ospf 35
+router-id 1.1.8.8
+network 105.100.50.0 255.255.255.252 area 0
+network 197.200.100.0 255.255.255.252 area 0
+network 10.11.11.0 255.255.255.224 area 0
+network 10.2.2.0 255.255.255.252 area 0
+network 10.2.2.8 255.255.255.252 area 0
+
+
+ON FW-02
+
+route OUTSIDE-01 0.0.0.0 0.0.0.0 105.100.50.5
+route OUTSIDE-02 0.0.0.0 0.0.0.0 197.200.100.5 70
+
+router ospf 35
+router-id 1.1.9.9
+
+network 105.100.50.4 255.255.255.252 area 0
+network 197.200.100.4 255.255.255.252 area 0
+network 10.2.2.4 255.255.255.252 area 0
+network 10.2.2.12 255.255.255.252 area 0
+
+
+

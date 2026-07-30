@@ -1,0 +1,109 @@
+HSRP and IP Routing
+
+On CORE-SW01
+
+int vlan 10
+no shut
+ip add 192.168.10.3 255.255.255.0
+
+standby 10 ip 192.168.10.1 
+
+ip helper-address 10.11.11.38
+
+ex
+
+do wr
+
+###################################################
+
+int vlan 20
+no shut
+ip add 172.16.0.3 255.255.0.0
+
+standby 20 ip 172.16.0.1
+
+ip helper-address 10.11.11.38
+
+ex
+
+do wr
+###################################################
+
+int vlan 50
+no shut
+ip add 10.20.0.2 255.255.0.0  // WE GEIVE IT .2 BECAUSE THE HIGH IP ADD WILL BE THE ROUTER AND WE WANT THE CORE-SW02 TO BE THE ROUTER FOR THE VLAN 50
+
+standby 50 ip 10.20.0.1
+
+ip helper-address 10.11.11.38
+
+ex
+
+do wr
+
+###################################################
+
+int vlan 90
+no shut
+
+ip add 10.11.11.34 255.255.255.224
+standby 90 ip 10.11.11.33
+
+ex
+
+do wr
+###################################################
+
+
+EXPECTED OUTPUT ON CORE-SW01
+
+
+!
+interface Vlan10
+ mac-address 00d0.9706.e001
+ ip address 192.168.10.3 255.255.255.0
+ ip helper-address 10.11.11.38
+ standby 10 ip 192.168.10.1
+!
+interface Vlan20
+ mac-address 00d0.9706.e002
+ ip address 172.16.0.3 255.255.0.0
+ ip helper-address 10.11.11.38
+ standby 20 ip 172.16.0.1
+!
+interface Vlan50
+ mac-address 00d0.9706.e003
+ ip address 10.20.0.2 255.255.0.0
+ ip helper-address 10.11.11.38
+ standby 50 ip 10.20.0.1
+!
+interface Vlan90
+ mac-address 00d0.9706.e004
+ ip address 10.11.11.34 255.255.255.224
+ standby 90 ip 10.11.11.33
+!
+
+###################################################
+SAME THING ON CORE-SW02
+
+interface Vlan10
+ ip address 192.168.10.2 255.255.255.0
+ ip helper-address 10.11.11.38
+ standby 10 ip 192.168.10.1
+!
+interface Vlan20
+ ip address 172.16.0.2 255.255.0.0
+ ip helper-address 10.11.11.38
+ standby 20 ip 172.16.0.1
+!
+interface Vlan50
+ ip address 10.20.0.3 255.255.0.0
+ ip helper-address 10.11.11.38
+ standby 50 ip 10.20.0.1
+!
+interface Vlan90
+ ip address 10.11.11.35 255.255.255.224
+ standby 90 ip 10.11.11.33
+
+
+#################################################

@@ -1,0 +1,24 @@
+EtherChannel : LACP
+
+
+CORE-SW01
+
+int range gig1/0/9-11
+channel-group 1 mode active
+
+
+int Port-channel 1
+switchport mode trunk 
+do wr
+
+CORE-SW02
+
+int range gig1/0/9-11
+channel-group 1 mode passive
+
+
+int Port-channel 1
+switchport mode trunk 
+do wr
+
+

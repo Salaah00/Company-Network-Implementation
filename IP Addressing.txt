@@ -1,0 +1,107 @@
+On CORE-SW01&02
+
+ip routing
+
+##############################"
+On CORE-SW01
+
+int gig1/0/1 
+no switchport
+ip add 10.2.2.1 255.255.255.252
+ex 
+do wr
+
+
+int gig1/0/2
+no switchport
+ip add 10.2.2.5 255.255.255.252
+ex 
+do wr
+
+
+On CORE-SW02
+
+int gig1/0/1 
+no switchport
+no shut
+ip add 10.2.2.9 255.255.255.252
+ex 
+do wr
+
+
+int gig1/0/2 
+no switchport
+no shut
+ip add 10.2.2.13 255.255.255.252
+ex 
+do wr
+
+
+##############################
+
+SEACOM-ISP
+
+int gig0/0
+ip add 105.100.50.1 255.255.255.252
+
+int gig0/1
+ip add 105.100.50.5 255.255.255.252
+
+int gig0/2 
+ip add 20.20.20.1 255.255.255.252
+
+################################
+
+SAFARICOM-ISP
+
+int gig0/0
+ip add 192.200.100.1 255.255.255.252
+
+
+int gig0/1
+ip add 192.200.100.5 255.255.255.252
+
+int gig0/2
+ip add 30.30.30.1 255.255.255.252
+
+##################################
+
+Router 3
+
+int gig0/0
+ip add 20.20.20.2 255.255.255.252
+
+int gig0/1
+ip add 30.30.30.2 255.255.255.252
+
+int gig0/2
+ip add 8.0.0.1 255.0.0.0
+
+##################################
+
+
+PC CHINA-INTERNET-USER
+IP = STATIC
+
+8.0.0.10
+255.0.0.0
+8.0.0.1
+8.0.0.1
+
+
+
+PC USA-INTERNET-USER
+IP = STATIC
+
+8.0.0.20
+255.0.0.0
+8.0.0.1
+8.0.0.1
+
+
+
+
+
+
+
+

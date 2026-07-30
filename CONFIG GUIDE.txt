@@ -1,0 +1,19 @@
+###############CONFIG GUIDE###################
+
+0. Network Design and beautification
+1. Basic settings to all devices + SSH + Standard ACL for SSH 
+2. VLAN assignement plus all access and trunk ports on l2 and l3 switchs
+2.1. STP PortFast and BPDUguard on all access ports.
+3. EtherChannel
+4. Subnetting and IP addressing 
+5. HSRP and Inter-vlan routing on L3 switches plus ip DHCP helper addresses
+6. Static IP address to DMZ/server farm devices.
+7. DHCP Server defice configurations.
+8. OSPF on the Firewall, Routers and Switches.
+9. Firewall interface security zones and levels
+9.1. Firewall routing- OSPF + Static Routes
+10. Firewall inspection Policy configuration
+11. Wireless network configurations
+12. VoIP Configurations.
+13. Verify and testing configurations.
+

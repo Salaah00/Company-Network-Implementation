@@ -1,0 +1,21 @@
+STP PortFast and BPDUguard 
+
+ON SRV-SW
+
+int range fa0/5-24, fa0/3
+spanning-tree portfast
+spanning-tree bpduguard enable 
+
+ON ACC-SW
+
+int range fa0/3-24
+spanning-tree portfast
+spanning-tree bpduguard enable 
+do wr
+
+ON DMZ-SW
+
+int range fa0/1-24
+spanning-tree portfast
+spanning-tree bpduguard enable 
+do wr
